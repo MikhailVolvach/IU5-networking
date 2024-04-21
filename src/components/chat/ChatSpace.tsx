@@ -11,7 +11,7 @@ import ChatMessageList from './ChatMessageList';
 
 const ChatSpace = () => {
     const { activeChat } = useContext(ActiveChatContext);
-
+    console.log(activeChat);
     return (
         <ChatContainer>
             {activeChat && (
@@ -44,10 +44,8 @@ const ChatContainer = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: url('/chat-bg.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
+    width: 1000px;
+    margin: 0 auto;
 `;
 
 export default ChatSpace;

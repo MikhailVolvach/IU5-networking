@@ -11,7 +11,8 @@ import { toast } from 'react-toastify';
 
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import SendIcon from '@mui/icons-material/Send';
+import ArrowActive from '../icons/ArrowActive';
+import ArrowInactive from '../icons/ArrowInactive';
 
 import { MessageService } from '../../api/generated/services/MessageService';
 import { ActiveChatContext } from '../../context/active-chat';
@@ -49,7 +50,8 @@ const ChatMessageInput = () => {
 
             setMessageValue('');
         } catch (err) {
-            toast.error(`${err}`);
+
+            // toast.error(`${err}`);
         }
     };
 
@@ -61,31 +63,45 @@ const ChatMessageInput = () => {
                 onChange={changeMessageValue}
                 onKeyUp={handleKeyPress}
             />
-            {messageValue && <StyledSendIcon onClick={sendMessage} />}
+            { messageValue ? <ArrowActive onClick={sendMessage} viewBox={"0 0 36 36"} width={"36"} height={"36"} style={{fontSize: "2rem"}} /> : <ArrowInactive viewBox={"0 0 36 36"} width={"36"} height={"36"} style={{fontSize: "2rem"}} /> }
         </Container>
     );
 };
 
-const fadeInRightAnimation = keyframes`${fadeInRight}`;
-
 const Container = styled.div`
+    box-sizing: border-box;
     display: flex;
-    padding: 10px;
+    align-items: center;
+    
     background: white;
     overflow: hidden;
+
+    border: 2px solid #4b72ec;
+    border-radius: 10px;
+    width: 1000px;
+    height: 66px;
+    padding-right: 20px;
+    margin-bottom: 30px;
 `;
 
 const MessageInput = styled.input`
     width: 100%;
-    padding: 5px;
     border: none;
     outline: none;
+    padding: 15px 0 15px 20px;
+    font-size: 20px;
 `;
 
-const StyledSendIcon = styled(SendIcon)`
-    cursor: pointer;
-    color: blue;
-    animation: 0.3s ${fadeInRightAnimation};
-`;
+// const ActiveSendIcon = styled(ArrowActive)`
+//     cursor: pointer;
+//     color: #4B72EC;
+//     width: 36px;
+//     height: 36px;
+// `;
+
+// const InActiveSendIcon = styled(ArrowInactive)`
+//     color: #7C7C7C;
+//     width: 36px;
+// `;
 
 export default ChatMessageInput;

@@ -12,16 +12,20 @@ type Props = {
 const ChatMessageList = ({ messages }: Props) => {
     const currentUser = useCurrentUser();
 
+    const nowTime = new Date();
+
     return (
         <StyledChatMessageList>
             {messages.map((message) =>
                 isCurrentUserMessage(currentUser, message) ? (
                     <RightMessage key={message.id}>
-                        {message.content}
+                        <MessageText>{message.content}</MessageText>
+                        <MessageTime>{nowTime.getHours()}:{nowTime.getMinutes()}</MessageTime>
                     </RightMessage>
                 ) : (
                     <LeftMessage key={message.id}>
-                        {message.content}
+                        <MessageText>{message.content}</MessageText>
+                        <MessageTime>{nowTime.getHours()}:{nowTime.getMinutes()}</MessageTime>
                     </LeftMessage>
                 )
             )}
@@ -37,23 +41,40 @@ const StyledChatMessageList = styled.div`
     display: flex;
     flex-grow: 1;
     flex-direction: column;
-    padding: 15px;
+    margin-bottom: 30px;
+    justify-content: flex-end;
+    font-size: 20px;
+    gap: 20px;
+`;
+
+const MessageText = styled.span`
+    color: #000;
+`;
+
+const MessageTime = styled.span`
+    color: #7C7C7C;
+    font-size: 14px;
+    line-height: 14px;
 `;
 
 const LeftMessage = styled.div`
     align-self: start;
-    background: white;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 5px;
+    background: #fff;
+    border-radius: 20px 20px 20px 10px;
+    padding: 11px 10px 11px 20px;
+    display: flex;
+    align-items: center;
+    gap: 21px;
 `;
 
 const RightMessage = styled.div`
+    display: flex;
+    align-items: center;
     align-self: end;
-    background: #91d47b;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 5px;
+    background: #fff;
+    border-radius: 20px 20px 10px 20px;
+    padding: 11px 10px 11px 20px;
+    gap: 21px;
 `;
 
 export default ChatMessageList;

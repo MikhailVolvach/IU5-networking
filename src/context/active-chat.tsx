@@ -16,7 +16,9 @@ export const ActiveChatContext = React.createContext<IActiveChatContext>({
 const ActiveChatProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
-    const [activeChat, setActiveChat] = useState<Chat | null>(null);
+    const [activeChat, setActiveChat] = useState<Chat | null>({id: 1,
+        name: 'Bob',
+        avatar: '/sass-avatar.svg',});
 
     return (
         <ActiveChatContext.Provider value={{ activeChat, setActiveChat }}>

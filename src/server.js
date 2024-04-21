@@ -23,17 +23,17 @@ export function makeServer({ environment = 'test' } = {}) {
                 avatar: '/sass-avatar.svg',
             });
 
-            server.create('user', {
-                id: 2,
-                username: 'Alice',
-                avatar: '/avatar.svg',
-            });
-
-            server.create('user', {
-                id: 3,
-                username: 'Stive',
-                avatar: '/google-meet.svg',
-            });
+            // server.create('user', {
+            //     id: 2,
+            //     username: 'Alice',
+            //     avatar: '/avatar.svg',
+            // });
+            //
+            // server.create('user', {
+            //     id: 3,
+            //     username: 'Stive',
+            //     avatar: '/google-meet.svg',
+            // });
 
             const Alex = server.create('user', {
                 id: 4,
@@ -47,17 +47,17 @@ export function makeServer({ environment = 'test' } = {}) {
                 avatar: '/sass-avatar.svg',
             });
 
-            server.create('chat', {
-                id: 2,
-                name: 'Alice',
-                avatar: '/avatar.svg',
-            });
-
-            server.create('chat', {
-                id: 3,
-                name: 'Stive',
-                avatar: '/google-meet.svg',
-            });
+            // server.create('chat', {
+            //     id: 2,
+            //     name: 'Alice',
+            //     avatar: '/avatar.svg',
+            // });
+            //
+            // server.create('chat', {
+            //     id: 3,
+            //     name: 'Stive',
+            //     avatar: '/google-meet.svg',
+            // });
 
             server.create('message', {
                 id: 1,

@@ -8,7 +8,7 @@ import { useWebSocket } from '../../hooks/useWebSocket';
 
 const Root = () => {
     const dispatch = useAppDispatch();
-    const socket = useWebSocket(); // Используем контекст WebSocket
+    // const socket = useWebSocket(); // Используем контекст WebSocket
 
     return (
         <StyledRoot>

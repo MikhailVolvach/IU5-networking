@@ -8,15 +8,16 @@ import { ActiveChatContext } from '../../context/active-chat';
 import FetchWrapper from '../common/FetchWrapper';
 import ChatMessageInput from './ChatMessageInput';
 import ChatMessageList from './ChatMessageList';
+import { useWebSocket } from '../../hooks/useWebSocket';
 
 const ChatSpace = () => {
     const { activeChat } = useContext(ActiveChatContext);
-
+    const { messages } = useWebSocket();
 
 
     return (
         <ChatContainer>
-            <ChatMessageList messages={[]} />
+            <ChatMessageList messages={messages} />
             <ChatMessageInput />
             {/*{activeChat && (*/}
             {/*    <>*/}

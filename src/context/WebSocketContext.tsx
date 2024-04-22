@@ -45,8 +45,9 @@
 
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { Message } from '../types/Message';
 
-export const WebSocketContext = createContext(null);
+export const WebSocketContext = createContext({messages: [] as Message[], socket: {}, isConnected: false, error: ''});
 
 // export const useWebSocket = () => useContext(WebSocketContext);
 
@@ -55,8 +56,10 @@ export const WebSocketProvider = ({ username, children }) => {
     const [socket, setSocket] = useState(null);
     const [isConnected, setIsConnected] = useState(false);
     const [error, setError] = useState(null);
+    const [messages, setMessages] = useState<Message[]>([]);
 
     useEffect(() => {
+        if (!username) return;
         const newSocket = new WebSocket(`ws://127.0.0.1:8080/ws/send?username=${encodeURIComponent(username)}`);
 
         newSocket.onopen = () => {
@@ -75,6 +78,16 @@ export const WebSocketProvider = ({ username, children }) => {
             console.log('Disconnected from server');
         };
 
+        newSocket.onmessage = (event) => {
+            const messageData = JSON.parse(event.data);
+            const newMessage = {
+                from: messageData.from,
+                content: messageData.content,
+                time: messageData.time
+            };
+            setMessages(prevMessages => [...prevMessages, newMessage]);
+        };
+
         // @ts-ignore
         setSocket(newSocket);
 
@@ -83,8 +96,8 @@ export const WebSocketProvider = ({ username, children }) => {
         };
     }, [username]);
 
-    return (
-        <WebSocketContext.Provider value={{ socket, isConnected, error }}>
+    // @ts-ignore
+    return (<WebSocketContext.Provider value={{ messages, socket, isConnected, error }}>
             {children}
         </WebSocketContext.Provider>
     );

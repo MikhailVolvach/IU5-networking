@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import { Message } from '../../api/generated/models/Message';
+// import { Message } from '../../api/generated/models/Message';
 import { User } from '../../api/generated/models/User';
 import { useCurrentUser } from '../../state/current-user/slice';
+import { Message } from '../../types/Message';
+import { v4 } from 'uuid';
 
 type Props = {
     messages: Message[];
@@ -18,12 +20,12 @@ const ChatMessageList = ({ messages }: Props) => {
         <StyledChatMessageList>
             {messages.map((message) =>
                 isCurrentUserMessage(currentUser, message) ? (
-                    <RightMessage key={message.id}>
+                    <RightMessage key={v4()}>
                         <MessageText>{message.content}</MessageText>
                         <MessageTime>{nowTime.getHours()}:{nowTime.getMinutes()}</MessageTime>
                     </RightMessage>
                 ) : (
-                    <LeftMessage key={message.id}>
+                    <LeftMessage key={v4()}>
                         <MessageText>{message.content}</MessageText>
                         <MessageTime>{nowTime.getHours()}:{nowTime.getMinutes()}</MessageTime>
                     </LeftMessage>
@@ -34,7 +36,7 @@ const ChatMessageList = ({ messages }: Props) => {
 };
 
 const isCurrentUserMessage = (currentUser: User, message: Message) => {
-    return message.fromId == currentUser.id;
+    return message.from === currentUser.username;
 };
 
 const StyledChatMessageList = styled.div`

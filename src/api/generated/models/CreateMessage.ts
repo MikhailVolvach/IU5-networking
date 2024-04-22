@@ -9,6 +9,6 @@ export type CreateMessage = {
     content: string;
     from?: User;
     to?: User;
-    fromId: number;
-    toId: number;
+    fromId: string;
+    toId: string;
 };

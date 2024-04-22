@@ -1,6 +1,7 @@
 import React, { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 
 import { Chat } from '../api/generated';
+import { useWebSocket } from '../hooks/useWebSocket';
 
 export type IActiveChatContext = {
     activeChat: Chat | null;
@@ -16,8 +17,8 @@ export const ActiveChatContext = React.createContext<IActiveChatContext>({
 const ActiveChatProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
-    const [activeChat, setActiveChat] = useState<Chat | null>({id: 1,
-        name: 'Bob',
+    const [activeChat, setActiveChat] = useState<Chat | null>({id: '1',
+        name: 'Chat',
         avatar: '/sass-avatar.svg',});
 
     return (

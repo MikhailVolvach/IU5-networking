@@ -15,7 +15,7 @@ export class MessageService {
      * @throws ApiError
      */
     public static getMessagesByChat(
-        chatId: number
+        chatId: string
     ): CancelablePromise<Array<Message>> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -34,7 +34,7 @@ export class MessageService {
      * @throws ApiError
      */
     public static addMessageInChat(
-        chatId: number,
+        chatId: string,
         requestBody: CreateMessage
     ): CancelablePromise<any> {
         return __request(OpenAPI, {

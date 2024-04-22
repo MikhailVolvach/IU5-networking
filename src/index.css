@@ -6,6 +6,18 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'MTSText-Medium';
+    src: url('./fonts/MTSText-Medium.ttf') format('truetype');
+    /* Дополнительные настройки, если нужно */
+    font-weight: 600;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 html,
 body {
     height: 100%;

@@ -62,6 +62,7 @@ const ChatMessageInput = () => {
                 value={messageValue}
                 onChange={changeMessageValue}
                 onKeyUp={handleKeyPress}
+                disabled={!currentUser.username}
             />
             { messageValue ? <ArrowActive onClick={sendMessage} viewBox={"0 0 36 36"} width={"36"} height={"36"} style={{fontSize: "2rem"}} /> : <ArrowInactive viewBox={"0 0 36 36"} width={"36"} height={"36"} style={{fontSize: "2rem"}} /> }
         </Container>

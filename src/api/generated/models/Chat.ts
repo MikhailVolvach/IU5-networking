@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 export type Chat = {
-    id: number;
+    id: string;
     name: string;
     avatar: string;
 };

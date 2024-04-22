@@ -6,7 +6,7 @@ import { useAppSelector } from '../../hooks';
 const currentUser = createSlice({
     name: 'currentUser',
     initialState: {
-        id: 0,
+        id: '0',
         username: '',
         avatar: '',
     },

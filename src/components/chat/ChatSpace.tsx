@@ -11,27 +11,31 @@ import ChatMessageList from './ChatMessageList';
 
 const ChatSpace = () => {
     const { activeChat } = useContext(ActiveChatContext);
-    console.log(activeChat);
+
+
+
     return (
         <ChatContainer>
-            {activeChat && (
-                <>
-                    <FetchWrapper<Message[]>
-                        queryKey={activeChat.id.toString()}
-                        fetchFn={async () =>
-                            await MessageService.getMessagesByChat(
-                                activeChat.id
-                            )
-                        }
-                        queryOptions={{ refetchInterval: 3000 }}
-                        emptyEl={<ChatMessageEmptyList />}
-                        render={({ data }) => {
-                            return <ChatMessageList messages={data} />;
-                        }}
-                    />
-                    <ChatMessageInput />
-                </>
-            )}
+            <ChatMessageList messages={[]} />
+            <ChatMessageInput />
+            {/*{activeChat && (*/}
+            {/*    <>*/}
+            {/*        <FetchWrapper<Message[]>*/}
+            {/*            queryKey={activeChat.id.toString()}*/}
+            {/*            fetchFn={async () =>*/}
+            {/*                await MessageService.getMessagesByChat(*/}
+            {/*                    activeChat.id*/}
+            {/*                )*/}
+            {/*            }*/}
+            {/*            queryOptions={{ refetchInterval: 3000 }}*/}
+            {/*            emptyEl={<ChatMessageEmptyList />}*/}
+            {/*            render={({ data }) => {*/}
+            {/*                return <ChatMessageList messages={data} />;*/}
+            {/*            }}*/}
+            {/*        />*/}
+            {/*        <ChatMessageInput />*/}
+            {/*    </>*/}
+            {/*)}*/}
         </ChatContainer>
     );
 };

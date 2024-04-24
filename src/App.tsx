@@ -29,6 +29,7 @@ const UserProxy = () => {
     const currentUser = useCurrentUser();
     const [isModalOpen, setIsModalOpen] = useState<boolean>(true); // Состояние для отображения модального окна
     const [username, setUsername] = useState<string>(''); // Состояние для хранения имени пользователя
+    const { isConnected } = useWebSocket();
 
     const handleLogin = (value: string) => {
         setUsername(value);
@@ -58,7 +59,7 @@ const UserProxy = () => {
         <WebSocketProvider usrname={username}>
             <ActiveChatProvider>
                 <Root />
-                {!currentUser.username && <AuthModal open={isModalOpen} authCallback={handleLogin}/>}
+                {!isConnected && <AuthModal open={isModalOpen} authCallback={handleLogin}/>}
             </ActiveChatProvider>
         </WebSocketProvider>
     )

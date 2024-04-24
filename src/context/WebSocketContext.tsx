@@ -33,6 +33,7 @@ export const WebSocketProvider = ({ usrname, children }) => {
             // @ts-ignore
             setError(event);
             setUsername('');
+            setIsConnected(false);
             console.error('WebSocket error:', event);
         };
 
@@ -44,6 +45,7 @@ export const WebSocketProvider = ({ usrname, children }) => {
 
         newSocket.onmessage = (event) => {
             const messageData = JSON.parse(event.data);
+            console.log(messageData);
             const newMessage = {
                 from: messageData.username,
                 content: messageData.content,

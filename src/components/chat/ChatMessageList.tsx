@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
-// import { Message } from '../../api/generated/models/Message';
-import { User } from '../../api/generated/models/User';
+import { User } from '../../api/generated';
 import { useCurrentUser } from '../../state/current-user/slice';
 import { Message } from '../../types/Message';
 import { v4 } from 'uuid';
+import Error from '../icons/Error';
 
 type Props = {
     messages: Message[];
@@ -14,25 +15,23 @@ type Props = {
 const ChatMessageList = ({ messages }: Props) => {
     const currentUser = useCurrentUser();
 
-    const nowTime = new Date();
-
     return (
         <StyledChatMessageList>
             {messages.map((message) =>
             {
                 const date = new Date(message.time);
                 const messageTime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-                if (message.error) {
-                    return <ErrorMessage >
-                        <LeftMessageContent>
-                            <LeftMessageAuthor>
-                                {message.from}
-                            </LeftMessageAuthor>
-                            <MessageText>{message.content}</MessageText>
-                        </LeftMessageContent>
-                        <MessageTime>{messageTime}</MessageTime>
-                    </ErrorMessage>
+                if (message.error && message.from === currentUser.username) {
+                    console.log(message.error, message.from);
+                    return <ErrorMessageContainer>
+                        <Error height={28} width={28} viewBox={"0 0 28 28"} />
+                        <ErrorMessage >
+                            <MessageTextError>{message.content}</MessageTextError>
+                            <MessageTimeError>{messageTime}</MessageTimeError>
+                        </ErrorMessage>
+                    </ErrorMessageContainer>
                 }
+                if (message.error) return;
                 return isCurrentUserMessage(currentUser, message) ? (
                     <RightMessage key={v4()}>
                         <MessageText>{message.content}</MessageText>
@@ -66,19 +65,46 @@ const StyledChatMessageList = styled.div`
     gap: 20px;
 `;
 
-const MessageText = styled.span`
-    color: #000;
-    max-width: 480px;
-    width: fit-content;
-    text-align: left;
+const MessageTextBase = css`
+  max-width: 480px;
+  width: fit-content;
+  text-align: left;
   word-break: break-word;
   margin-top: -5px;
 `;
 
-const MessageTime = styled.span`
-  color: #7C7C7C;
+const MessageTimeBase = css`
   font-size: 14px;
   line-height: 14px;
+`;
+
+const RightMessageBase = css`
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 20px 20px 10px 20px;
+  padding: 11px 10px 11px 10px;
+  gap: 21px;
+`;
+
+const MessageText = styled.span`
+  color: #000;
+  ${MessageTextBase};
+`;
+
+const MessageTextError = styled.span`
+  color: #BE3A31;
+  ${MessageTextBase};
+`;
+
+const MessageTime = styled.span`
+  color: #7C7C7C;
+  ${MessageTimeBase};
+`;
+
+const MessageTimeError = styled.span`
+  color: #BE3A31;
+  ${MessageTimeBase};
 `;
 
 const LeftMessage = styled.div`
@@ -91,17 +117,18 @@ const LeftMessage = styled.div`
   gap: 21px;
 `;
 
-const ErrorMessage = styled.div`
+const ErrorMessageContainer = styled.div`
   display: flex;
-  align-items: center;
+  gap: 5px;
   align-self: end;
-  background: #fff;
-  border-radius: 20px 20px 10px 20px;
-  padding: 11px 10px 11px 10px;
-  gap: 21px;
-  
+  align-items: center;
+`;
+
+const ErrorMessage = styled.div`  
   border: 2px solid #BE3A31;
   color: #BE3A31 !important;
+  align-self: end;
+  ${RightMessageBase};
 `;
 
 const LeftMessageAuthor = styled.div`
@@ -118,13 +145,8 @@ const LeftMessageContent = styled.div`
 `
 
 const RightMessage = styled.div`
-    display: flex;
-    align-items: center;
-    align-self: end;
-    background: #fff;
-    border-radius: 20px 20px 10px 20px;
-    padding: 11px 10px 11px 10px;
-    gap: 21px;
+  align-self: end;
+    ${RightMessageBase};
 `;
 
 export default ChatMessageList;

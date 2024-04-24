@@ -11,17 +11,23 @@ import ReactDOM from 'react-dom/client';
 
 import App from './App';
 import { makeServer } from './server';
+import { DevSupport } from '@react-buddy/ide-toolbox';
+import { ComponentPreviews, useInitial } from './dev';
 
 if (process.env.REACT_APP_STUB_SERVER) {
     makeServer({ environment: 'development' });
 }
 
 const root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement,
 );
 
 root.render(
     <React.StrictMode>
-        <App />
-    </React.StrictMode>
+        <DevSupport ComponentPreviews={ComponentPreviews}
+                    useInitialHook={useInitial}
+        >
+            <App />
+        </DevSupport>
+    </React.StrictMode>,
 );

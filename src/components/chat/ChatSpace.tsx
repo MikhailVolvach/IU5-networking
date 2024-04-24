@@ -19,24 +19,6 @@ const ChatSpace = () => {
         <ChatContainer>
             <ChatMessageList messages={messages} />
             <ChatMessageInput />
-            {/*{activeChat && (*/}
-            {/*    <>*/}
-            {/*        <FetchWrapper<Message[]>*/}
-            {/*            queryKey={activeChat.id.toString()}*/}
-            {/*            fetchFn={async () =>*/}
-            {/*                await MessageService.getMessagesByChat(*/}
-            {/*                    activeChat.id*/}
-            {/*                )*/}
-            {/*            }*/}
-            {/*            queryOptions={{ refetchInterval: 3000 }}*/}
-            {/*            emptyEl={<ChatMessageEmptyList />}*/}
-            {/*            render={({ data }) => {*/}
-            {/*                return <ChatMessageList messages={data} />;*/}
-            {/*            }}*/}
-            {/*        />*/}
-            {/*        <ChatMessageInput />*/}
-            {/*    </>*/}
-            {/*)}*/}
         </ChatContainer>
     );
 };

@@ -19,18 +19,26 @@ const ChatMessageList = ({ messages }: Props) => {
     return (
         <StyledChatMessageList>
             {messages.map((message) =>
-                isCurrentUserMessage(currentUser, message) ? (
+            {
+                const date = new Date(message.time);
+                const messageTime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+                return isCurrentUserMessage(currentUser, message) ? (
                     <RightMessage key={v4()}>
                         <MessageText>{message.content}</MessageText>
-                        <MessageTime>{nowTime.getHours()}:{nowTime.getMinutes()}</MessageTime>
+                        <MessageTime>{messageTime}</MessageTime>
                     </RightMessage>
                 ) : (
                     <LeftMessage key={v4()}>
-                        <MessageText>{message.content}</MessageText>
-                        <MessageTime>{nowTime.getHours()}:{nowTime.getMinutes()}</MessageTime>
+                        <LeftMessageContent>
+                            <LeftMessageAuthor>
+                                {message.from}
+                            </LeftMessageAuthor>
+                            <MessageText>{message.content}</MessageText>
+                        </LeftMessageContent>
+                        <MessageTime>{messageTime}</MessageTime>
                     </LeftMessage>
                 )
-            )}
+            })}
         </StyledChatMessageList>
     );
 };
@@ -51,23 +59,41 @@ const StyledChatMessageList = styled.div`
 
 const MessageText = styled.span`
     color: #000;
+    max-width: 480px;
+    width: fit-content;
+    text-align: left;
+  word-break: break-word;
+  margin-top: -5px;
 `;
 
 const MessageTime = styled.span`
-    color: #7C7C7C;
-    font-size: 14px;
-    line-height: 14px;
+  color: #7C7C7C;
+  font-size: 14px;
+  line-height: 14px;
 `;
 
 const LeftMessage = styled.div`
-    align-self: start;
-    background: #fff;
-    border-radius: 20px 20px 20px 10px;
-    padding: 11px 10px 11px 20px;
-    display: flex;
-    align-items: center;
-    gap: 21px;
+  display: flex;
+  align-self: start;
+  background: #fff;
+  border-radius: 20px 20px 20px 10px;
+  padding: 5px 10px 5px 10px;
+  align-items: center;
+  gap: 21px;
 `;
+
+const LeftMessageAuthor = styled.div`
+  color: #4B72EC;
+  font-size: 14px;
+  line-height: 14px;
+`;
+
+const LeftMessageContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+`
 
 const RightMessage = styled.div`
     display: flex;
@@ -75,7 +101,7 @@ const RightMessage = styled.div`
     align-self: end;
     background: #fff;
     border-radius: 20px 20px 10px 20px;
-    padding: 11px 10px 11px 20px;
+    padding: 11px 10px 11px 10px;
     gap: 21px;
 `;
 

@@ -30,9 +30,8 @@ const UserProxy = () => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(true); // Состояние для отображения модального окна
     const [username, setUsername] = useState<string>(''); // Состояние для хранения имени пользователя
 
-
-    const handleLogin = (username: string) => {
-        setUsername(username);
+    const handleLogin = (value: string) => {
+        setUsername(value);
         setIsModalOpen(false); // Закрываем модальное окно после авторизации
     };
 
@@ -48,8 +47,15 @@ const UserProxy = () => {
 
     }, [username]);
 
+    useEffect(() => {
+        if (!currentUser.username) {
+            setUsername('');
+            setIsModalOpen(true);
+        }
+    }, [currentUser.username]);
+
     return (
-        <WebSocketProvider username={username}>
+        <WebSocketProvider usrname={username}>
             <ActiveChatProvider>
                 <Root />
                 {!currentUser.username && <AuthModal open={isModalOpen} authCallback={handleLogin}/>}

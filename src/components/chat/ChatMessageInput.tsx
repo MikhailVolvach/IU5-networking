@@ -17,12 +17,14 @@ import ArrowInactive from '../icons/ArrowInactive';
 import { MessageService } from '../../api/generated/services/MessageService';
 import { ActiveChatContext } from '../../context/active-chat';
 import { useCurrentUser } from '../../state/current-user/slice';
+import { useWebSocket } from '../../hooks/useWebSocket';
 
 const ChatMessageInput = () => {
     const { activeChat } = useContext(ActiveChatContext);
     const currentUser = useCurrentUser();
     const [messageValue, setMessageValue] = useState('');
     const qc = useQueryClient();
+    const { sendMsg } = useWebSocket();
 
     const changeMessageValue = (e: ChangeEvent) => {
         const target = e.target as HTMLInputElement;
@@ -40,11 +42,13 @@ const ChatMessageInput = () => {
         if (!messageValue || !activeChat) return;
 
         try {
-            await MessageService.addMessageInChat(activeChat.id, {
-                content: messageValue,
-                fromId: currentUser.id,
-                toId: activeChat.id,
-            });
+            // await MessageService.addMessageInChat(activeChat.id, {
+            //     content: messageValue,
+            //     fromId: currentUser.id,
+            //     toId: activeChat.id,
+            // });
+            sendMsg(messageValue);
+
 
             qc.invalidateQueries(activeChat.id.toString());
 

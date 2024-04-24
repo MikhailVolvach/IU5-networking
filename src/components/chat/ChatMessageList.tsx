@@ -22,13 +22,8 @@ const ChatMessageList = ({ messages }: Props) => {
             {
                 const date = new Date(message.time);
                 const messageTime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-                return isCurrentUserMessage(currentUser, message) ? (
-                    <RightMessage key={v4()}>
-                        <MessageText>{message.content}</MessageText>
-                        <MessageTime>{messageTime}</MessageTime>
-                    </RightMessage>
-                ) : (
-                    <LeftMessage key={v4()}>
+                if (message.error) {
+                    return <ErrorMessage >
                         <LeftMessageContent>
                             <LeftMessageAuthor>
                                 {message.from}
@@ -36,8 +31,22 @@ const ChatMessageList = ({ messages }: Props) => {
                             <MessageText>{message.content}</MessageText>
                         </LeftMessageContent>
                         <MessageTime>{messageTime}</MessageTime>
-                    </LeftMessage>
-                )
+                    </ErrorMessage>
+                }
+                return isCurrentUserMessage(currentUser, message) ? (
+                    <RightMessage key={v4()}>
+                        <MessageText>{message.content}</MessageText>
+                        <MessageTime>{messageTime}</MessageTime>
+                    </RightMessage>
+                ) : (<LeftMessage key={v4()}>
+                            <LeftMessageContent>
+                                <LeftMessageAuthor>
+                                    {message.from}
+                                </LeftMessageAuthor>
+                                <MessageText>{message.content}</MessageText>
+                            </LeftMessageContent>
+                            <MessageTime>{messageTime}</MessageTime>
+                        </LeftMessage>)
             })}
         </StyledChatMessageList>
     );
@@ -77,9 +86,22 @@ const LeftMessage = styled.div`
   align-self: start;
   background: #fff;
   border-radius: 20px 20px 20px 10px;
-  padding: 5px 10px 5px 10px;
+  padding: 8px 10px 5px 10px;
   align-items: center;
   gap: 21px;
+`;
+
+const ErrorMessage = styled.div`
+  display: flex;
+  align-items: center;
+  align-self: end;
+  background: #fff;
+  border-radius: 20px 20px 10px 20px;
+  padding: 11px 10px 11px 10px;
+  gap: 21px;
+  
+  border: 2px solid #BE3A31;
+  color: #BE3A31 !important;
 `;
 
 const LeftMessageAuthor = styled.div`

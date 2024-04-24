@@ -47,7 +47,8 @@ export const WebSocketProvider = ({ usrname, children }) => {
             const newMessage = {
                 from: messageData.username,
                 content: messageData.content,
-                time: messageData.time
+                time: messageData.time,
+                error: messageData.error
             };
             setMessages(prevMessages => [...prevMessages, newMessage]);
         };

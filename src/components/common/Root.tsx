@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -18,7 +18,6 @@ const Root = () => {
             setUserCurrentAction({
                 id: '',
                 username: '',
-                avatar: ''
             })
         );
     }, [exit, dispatch]);

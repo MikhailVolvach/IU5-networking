@@ -2,9 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
+import { User } from '../../types/User';
 import Slide from '@mui/material/Slide';
-
-import { User } from '../../api/generated';
 import { useCurrentUser } from '../../state/current-user/slice';
 import { Message } from '../../types/Message';
 import { v4 } from 'uuid';
@@ -33,7 +32,7 @@ const ChatMessageList = ({ messages }: Props) => {
                         </ErrorMessage>
                     </ErrorMessageContainer>
                 }
-                if (message.error) return;
+                if (message.error) return <div></div>;
                 return isCurrentUserMessage(currentUser, message) ? (
                     <RightMessage key={v4()}>
                         <MessageText>{message.content}</MessageText>

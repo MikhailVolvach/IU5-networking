@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 
 import { Avatar, List, ListItemAvatar, ListItemButton } from '@mui/material';
 
-import { Chat } from '../../api/generated';
+import { Chat } from '../../types/Chat';
 import { ActiveChatContext } from '../../context/active-chat';
 
 type Props = {

@@ -7,14 +7,11 @@ import React, {
 
 import { fadeInRight } from 'react-animations';
 import { useQueryClient } from 'react-query';
-import { toast } from 'react-toastify';
 
-import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import ArrowActive from '../icons/ArrowActive';
 import ArrowInactive from '../icons/ArrowInactive';
 
-import { MessageService } from '../../api/generated/services/MessageService';
 import { ActiveChatContext } from '../../context/active-chat';
 import { useCurrentUser } from '../../state/current-user/slice';
 import { useWebSocket } from '../../hooks/useWebSocket';

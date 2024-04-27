@@ -42,11 +42,10 @@ const UserProxy = () => {
             setUserCurrentAction({
                 id: uuidv4(),
                 username: username,
-                avatar: '',
             })
         );
 
-    }, [username]);
+    }, [username, dispatch]);
 
     useEffect(() => {
         if (!currentUser.username) {

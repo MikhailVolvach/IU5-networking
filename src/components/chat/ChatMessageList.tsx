@@ -2,6 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
+import Slide from '@mui/material/Slide';
+
 import { User } from '../../api/generated';
 import { useCurrentUser } from '../../state/current-user/slice';
 import { Message } from '../../types/Message';

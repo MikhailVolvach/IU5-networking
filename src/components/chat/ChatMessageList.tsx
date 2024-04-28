@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
 import { User } from '../../types/User';
-import Slide from '@mui/material/Slide';
 import { useCurrentUser } from '../../state/current-user/slice';
 import { Message } from '../../types/Message';
 import { v4 } from 'uuid';
@@ -23,7 +22,6 @@ const ChatMessageList = ({ messages }: Props) => {
                 const date = new Date(message.time);
                 const messageTime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
                 if (message.error && message.from === currentUser.username) {
-                    console.log(message.error, message.from);
                     return <ErrorMessageContainer>
                         <Error height={28} width={28} viewBox={"0 0 28 28"} />
                         <ErrorMessage >

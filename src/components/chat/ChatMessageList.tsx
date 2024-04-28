@@ -27,7 +27,7 @@ const ChatMessageList = ({ messages }: Props) => {
                     return <ErrorMessageContainer>
                         <Error height={28} width={28} viewBox={"0 0 28 28"} />
                         <ErrorMessage >
-                            <MessageTextError>{message.content}</MessageTextError>
+                            <MessageTextError>Ошибка отправки</MessageTextError>
                             <MessageTimeError>{messageTime}</MessageTimeError>
                         </ErrorMessage>
                     </ErrorMessageContainer>

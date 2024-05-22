@@ -21,7 +21,7 @@ export const WebSocketProvider = ({ usrname, children }) => {
 
     useEffect(() => {
         if (!usrname) return;
-        const newSocket = new WebSocket(`ws://127.0.0.1:8080/ws/send?username=${encodeURIComponent(usrname)}`);
+        const newSocket = new WebSocket(`ws://pinspire.site:3000/ws/send?username=${encodeURIComponent(usrname)}`);
 
         newSocket.onopen = () => {
             setIsConnected(true);

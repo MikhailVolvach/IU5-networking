@@ -58,6 +58,7 @@ const ModalWindow = ({ open, authCallback }) => {
 
     const btnClickHandler = useCallback(() => {
         authCallback(username);
+        setUsername("");
     }, [username, authCallback]);
     return (
         // <StyledModal open={open} onClose={onClose}>

@@ -1,5 +1,3 @@
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
-import styled from '@emotion/styled';
 import { createSvgIcon } from '@mui/material';
 
 

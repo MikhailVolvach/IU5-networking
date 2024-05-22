@@ -1,23 +1,19 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import styled from '@emotion/styled';
 
-import { Message } from '../../api/generated/models/Message';
-import { MessageService } from '../../api/generated/services/MessageService';
-import { ActiveChatContext } from '../../context/active-chat';
-import FetchWrapper from '../common/FetchWrapper';
 import ChatMessageInput from './ChatMessageInput';
 import ChatMessageList from './ChatMessageList';
 import { useWebSocket } from '../../hooks/useWebSocket';
 
 const ChatSpace = () => {
-    const { activeChat } = useContext(ActiveChatContext);
     const { messages } = useWebSocket();
 
 
     return (
         <ChatContainer>
-            <ChatMessageList messages={messages} />
+            {messages.length ? <ChatMessageList messages={messages} /> : <ChatMessageEmptyList />}
+
             <ChatMessageInput />
         </ChatContainer>
     );

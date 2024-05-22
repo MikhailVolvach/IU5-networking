@@ -1,7 +1,6 @@
 import React, { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 
-import { Chat } from '../api/generated';
-import { useWebSocket } from '../hooks/useWebSocket';
+import { Chat } from '../types/Chat';
 
 export type IActiveChatContext = {
     activeChat: Chat | null;

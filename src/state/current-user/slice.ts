@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { User } from '../../api/generated/models/User';
+import { User } from '../../types/User';
+
 import { useAppSelector } from '../../hooks';
 
 const currentUser = createSlice({
@@ -8,7 +9,6 @@ const currentUser = createSlice({
     initialState: {
         id: '0',
         username: '',
-        avatar: '',
     },
     reducers: {
         setCurrentUser(state, { payload }: PayloadAction<User>) {

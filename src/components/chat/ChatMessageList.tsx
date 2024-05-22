@@ -2,9 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-import Slide from '@mui/material/Slide';
-
-import { User } from '../../api/generated';
+import { User } from '../../types/User';
 import { useCurrentUser } from '../../state/current-user/slice';
 import { Message } from '../../types/Message';
 import { v4 } from 'uuid';
@@ -24,16 +22,15 @@ const ChatMessageList = ({ messages }: Props) => {
                 const date = new Date(message.time);
                 const messageTime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
                 if (message.error && message.from === currentUser.username) {
-                    console.log(message.error, message.from);
                     return <ErrorMessageContainer>
                         <Error height={28} width={28} viewBox={"0 0 28 28"} />
                         <ErrorMessage >
-                            <MessageTextError>{message.content}</MessageTextError>
+                            <MessageTextError>Ошибка отправки</MessageTextError>
                             <MessageTimeError>{messageTime}</MessageTimeError>
                         </ErrorMessage>
                     </ErrorMessageContainer>
                 }
-                if (message.error) return;
+                if (message.error) return <div></div>;
                 return isCurrentUserMessage(currentUser, message) ? (
                     <RightMessage key={v4()}>
                         <MessageText>{message.content}</MessageText>
